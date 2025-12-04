@@ -155,7 +155,7 @@ include '../includes/header.php';
                      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all group" 
                          x-show="selectedCategory === 'all' || selectedCategory === 'industrial'">
                         <div class="h-48 bg-gray-200 relative">
-                            <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Welding" class="w-full h-full object-cover">
+                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Welding" class="w-full h-full object-cover">
                             <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-primary text-xs font-bold px-2 py-1 rounded">PHP 4,000</span>
                         </div>
                         <div class="p-5">
