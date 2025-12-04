@@ -36,7 +36,7 @@
         prevSlide() { this.activeSlide = (this.activeSlide === 0) ? this.slides.length - 1 : this.activeSlide - 1; },
         goToSlide(index) { this.activeSlide = index; clearInterval(this.timer); this.startAutoPlay(); }
     }"
-    class="relative h-[100px] md:h-[750px] bg-gray-900 overflow-hidden group"
+    class="relative h-[100px] md:h-[550px] bg-gray-900 overflow-hidden group"
 >
     <template x-for="(slide, index) in slides" :key="index">
         <div 
@@ -114,11 +114,11 @@
         <div class="bg-white rounded-lg shadow-2xl border-b-4 border-primary p-8 grid grid-cols-2 md:grid-cols-3 gap-8 text-center relative overflow-hidden">
              <div class="absolute inset-0 bg-gradient-to-r from-violet-100/50 via-transparent to-blue-100/50 opacity-50 pointer-events-none"></div>
             <div class="relative">
-                <div class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-br from-violet-600 to-purple-600 mb-1">98%</div>
+                <div class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-violet-600 to-purple-600 mb-1">98%</div>
                 <div class="text-xs text-gray-500 uppercase font-bold tracking-wider">Passing Rate</div>
             </div>
             <div class="relative">
-                <div class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-br from-orange-500 to-purple-500 mb-1">10</div>
+                <div class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-orange-500 to-purple-500 mb-1">10</div>
                 <div class="text-xs text-gray-500 uppercase font-bold tracking-wider">Company Partners</div>
             </div>
             <div class="relative border-l border-gray-100 pl-8 hidden md:block text-left">
@@ -568,6 +568,82 @@
                 View Full Catalog
                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </a>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-gray-50 relative">
+    <div class="container mx-auto px-6">
+        
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-black text-gray-800 mb-4">Visit Our Center</h2>
+            <p class="text-gray-500">We are conveniently located to serve your training needs.</p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8 shadow-2xl rounded-3xl overflow-hidden bg-white">
+            
+            <div class="w-full lg:w-1/3 bg-primary text-white p-10 flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                
+                <div class="relative z-10 space-y-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-1">Our Location</h3>
+                        <p class="text-blue-100 text-sm">
+                            3568 St Agnes <br>
+                            Caloocan City, Metro Manila, <br>
+                            Philippines
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold mb-1">Contact Us</h3>
+                        <p class="text-blue-100 text-sm flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                            0992 987 1284
+                        </p>
+                        <p class="text-blue-100 text-sm flex items-center gap-2 mt-1">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            tvlc.inc.24@gmail.com
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold mb-1">Office Hours</h3>
+                        <p class="text-blue-100 text-sm">Mon - Fri: 8:00 AM - 5:00 PM</p>
+                        <p class="text-blue-100 text-sm">Sat: 8:00 AM - 12:00 PM</p>
+                    </div>
+                </div>
+
+                <div class="relative z-10 flex gap-4 mt-8">
+                    <a href="https://www.facebook.com/profile.php?id=61559506239987&rdid=0bsFGS3skOliGt81&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1A4PNYYKd1%2F#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-primary transition-all">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-2/3 relative group bg-gray-200 min-h-[400px]">
+                
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!4v1764829962454!6m8!1m7!1sZvwEfmr5buEMhu8du1X2rQ!2m2!1d14.75916455248104!2d121.0459847005791!3f167.48466773288712!4f2.4052158341459915!5f0.7820865974627469" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0; min-height: 400px;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+                <div 
+                    class="absolute inset-0 bg-black/10 flex items-center justify-center cursor-pointer group-hover:bg-transparent transition-all"
+                    onclick="this.style.pointerEvents='none'; this.style.opacity='0';"
+                >
+                    <span class="bg-white px-4 py-2 rounded-full shadow-lg text-sm font-bold text-gray-700 pointer-events-none group-hover:opacity-0 transition-opacity">
+                        Click map to interact
+                    </span>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </section>
