@@ -218,9 +218,147 @@ if ($result && $result->num_rows > 0) {
 </section>
 
 <script>
-    // We store the PHP data in a JavaScript variable first
-    window.tvlcPartners = <?php echo !empty($partners_data) ? json_encode($partners_data) : '[]'; ?>;
+    window.partnersData = <?php echo !empty($partners_data) ? json_encode($partners_data) : '[]'; ?>;
 </script>
+
+<section class="py-20 bg-white overflow-hidden" 
+    id="partners"
+    x-data="{ 
+        activePartner: null,
+        currentSlide: 0,
+        itemsPerView: 3, 
+        
+        // Load data from the script tag above
+        partners: window.partnersData,
+
+        init() {
+            this.updateLayout();
+            const params = new URLSearchParams(window.location.search);
+            const urlId = params.get('partner_id');
+            if (urlId && this.partners.length > 0) {
+                const found = this.partners.find(p => p.id == urlId);
+                if (found) {
+                    this.activePartner = found;
+                    this.$nextTick(() => {
+                        const el = document.getElementById('partners');
+                        if(el) el.scrollIntoView({ behavior: 'smooth' });
+                    });
+                }
+            }
+        },
+
+        updateLayout() {
+            this.itemsPerView = window.innerWidth < 768 ? 1 : 3;
+            if(this.partners.length > 0) {
+                const maxSlide = this.partners.length - this.itemsPerView;
+                if (this.currentSlide > maxSlide) this.currentSlide = Math.max(0, maxSlide);
+            }
+        },
+        
+        next() {
+            if(this.partners.length === 0) return;
+            const maxSlide = this.partners.length - this.itemsPerView;
+            if (this.currentSlide < maxSlide) {
+                this.currentSlide++;
+            } else {
+                this.currentSlide = 0; 
+            }
+        },
+        prev() {
+            if(this.partners.length === 0) return;
+            const maxSlide = this.partners.length - this.itemsPerView;
+            if (this.currentSlide > 0) {
+                this.currentSlide--;
+            } else {
+                this.currentSlide = Math.max(0, maxSlide); 
+            }
+        }
+    }"
+    @resize.window="updateLayout()"
+>
+    <div class="container mx-auto px-6 relative">
+        
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-black text-gray-800 mb-4">Our Industry Partners</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">
+                We collaborate with top-tier companies to ensure our training meets industry standards.
+            </p>
+            <div class="w-16 h-1 bg-secondary mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <div class="relative group" x-show="partners.length > 0">
+            <button @click="prev()" class="absolute -left-4 md:-left-12 top-1/2 -translate-y-1/2 z-20 bg-white p-3 rounded-full shadow-lg text-primary hover:bg-primary hover:text-white transition-all disabled:opacity-50">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+
+            <button @click="next()" class="absolute -right-4 md:-right-12 top-1/2 -translate-y-1/2 z-20 bg-white p-3 rounded-full shadow-lg text-primary hover:bg-primary hover:text-white transition-all">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+
+            <div class="overflow-hidden py-4 -mx-4 px-4">
+                <div class="flex transition-transform duration-500 ease-out" :style="'transform: translateX(-' + (currentSlide * (100 / itemsPerView)) + '%)'">
+                    <template x-for="partner in partners" :key="partner.id">
+                        <div class="flex-shrink-0 px-4" :style="'width: ' + (100 / itemsPerView) + '%'">
+                            <div class="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 group/card flex flex-col h-full">
+                                <div class="h-48 relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-primary/20 group-hover/card:bg-transparent transition-colors z-10"></div>
+                                    <img :src="partner.image" :alt="partner.name" class="w-full h-full object-cover transform group-hover/card:scale-110 transition-transform duration-700">
+                                    <div class="absolute -bottom-6 right-6 w-12 h-12 rounded-lg shadow-lg flex items-center justify-center text-white font-bold text-sm border-2 border-white z-20" :class="partner.color">
+                                        <span x-text="partner.logo"></span>
+                                    </div>
+                                </div>
+                                <div class="p-6 pt-10 flex-grow flex flex-col">
+                                    <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover/card:text-primary transition-colors" x-text="partner.name"></h3>
+                                    <p class="text-sm text-gray-500 leading-relaxed mb-6 flex-grow line-clamp-3" x-text="partner.overview"></p>
+                                    <button @click="activePartner = partner" class="w-full py-3 rounded-lg border-2 border-primary text-primary font-bold text-sm uppercase tracking-wider hover:bg-primary hover:text-white transition-all focus:outline-none">
+                                        See Company Profile
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+        
+        <div x-show="partners.length === 0" class="text-center py-10 text-gray-400">
+            <p>No partners currently available.</p>
+        </div>
+    </div>
+
+    <div x-show="activePartner" style="display: none;" class="fixed inset-0 z-[70] overflow-y-auto" aria-modal="true">
+        <div x-show="activePartner" class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm" @click="activePartner = null"></div>
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+            <div x-show="activePartner" class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl">
+                <button @click="activePartner = null" class="absolute top-4 right-4 text-white bg-black/20 hover:bg-black/40 rounded-full p-1 z-20"><svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                <div class="h-48 w-full relative">
+                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                     <img :src="activePartner?.image" class="w-full h-full object-cover">
+                     <div class="absolute bottom-4 left-6 z-20 text-white">
+                         <h3 class="text-3xl font-black" x-text="activePartner?.name"></h3>
+                         <span class="text-sm opacity-90">Official Industry Partner</span>
+                     </div>
+                </div>
+                <div class="px-6 py-8 sm:px-10 max-h-[60vh] overflow-y-auto">
+                    <div class="mb-8"><h4 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Company Overview</h4><p class="text-gray-600 leading-relaxed" x-text="activePartner?.description"></p></div>
+                    <div class="grid md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-violet-50 p-5 rounded-xl border-l-4 border-primary"><h5 class="font-bold text-primary mb-2">Our Mission</h5><p class="text-sm text-gray-600 italic" x-text="activePartner?.mission"></p></div>
+                        <div class="bg-blue-50 p-5 rounded-xl border-l-4 border-secondary"><h5 class="font-bold text-secondary mb-2">Our Vision</h5><p class="text-sm text-gray-600 italic" x-text="activePartner?.vision"></p></div>
+                    </div>
+                    <div class="mb-8"><h4 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3">Key Services</h4><ul class="space-y-2"><template x-for="service in activePartner?.services"><li class="flex items-center text-gray-700"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span x-text="service"></span></li></template></ul></div>
+                    
+                    <div class="border-t border-gray-100 pt-6 flex justify-between items-center mt-8">
+                        <span class="text-sm font-bold text-gray-500">Connect with them:</span>
+                        <div class="flex space-x-4">
+                            <a :href="activePartner?.socials.fb" target="_blank" class="text-gray-400 hover:text-blue-600 transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                            <a :href="activePartner?.socials.web" target="_blank" class="text-gray-400 hover:text-gray-800 transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section class="py-20 bg-white overflow-hidden" 
     id="partners"
