@@ -37,7 +37,7 @@
     <nav class="bg-white shadow-lg sticky top-0 z-40 border-b border-gray-100" x-data="{ mobileMenuOpen: false }">
         <div class="container mx-auto px-6 h-20 flex justify-between items-center">
             
-             <a href="/" class="flex items-center gap-3 group">
+             <a href="/OJT/index.php" class="flex items-center gap-3 group">
                 <?php 
                 $path = ($_SERVER['SERVER_NAME'] == 'localhost') 
                     ? 'OJT'
@@ -62,15 +62,10 @@
 
                 <div class="relative" x-data="{ open: false }" @click.away="open = false" @mouseleave="open = false">
                     
-                    <button 
-                        @mouseover="open = true" 
-                        @click="open = !open"
-                        class="flex items-center gap-1 hover:text-primary transition-colors py-2 border-b-2 border-transparent hover:border-primary focus:outline-none"
-                        :class="open ? 'text-primary border-primary' : ''"
-                    >
+                    <a href="/training/training.php" @mouseover="open = true" class="flex items-center gap-1 hover:text-primary transition-colors py-2 border-b-2 border-transparent hover:border-primary focus:outline-none" :class="open ? 'text-primary border-primary' : ''">
                         Training
                         <svg class="w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
+                    </a>
 
                     <div 
                         x-show="open"
@@ -104,24 +99,40 @@
 
                     </div>
                 </div>
-                <a href="/trainees" class="hover:text-primary transition-colors py-2 border-b-2 border-transparent hover:border-primary">
-                    Trainees 
-                </a>
+                <div class="relative" x-data="{ open: false }" @click.away="open = false" @mouseleave="open = false">
+                    <a href="/trainees/trainees.php" @mouseover="open = true" class="flex items-center gap-1 hover:text-primary transition-colors py-2 border-b-2 border-transparent hover:border-primary focus:outline-none" :class="open ? 'text-primary border-primary' : ''">
+                        Trainees
+                        <svg class="w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+
+                    <div 
+                        x-show="open"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 translate-y-2"
+                        class="absolute left-0 mt-0 w-64 bg-white rounded-xl shadow-xl border border-gray-100 z-50 py-2"
+                        style="display: none;" 
+                    >
+                        <div class="px-2 space-y-1">
+                            <a href="/trainees/trainees.php" class="block w-full px-4 py-2 text-sm text-gray-600 rounded-lg hover:text-primary hover:bg-gray-50 transition-colors">
+                                Trainees Directory
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <a href="/hiring" class="hover:text-primary transition-colors py-2 border-b-2 border-transparent hover:border-primary">
                     Job Hiring
                 </a>
 
                 <div class="relative" x-data="{ open: false }" @click.away="open = false" @mouseleave="open = false">
                     
-                    <button 
-                        @mouseover="open = true" 
-                        @click="open = !open"
-                        class="flex items-center gap-1 hover:text-primary transition-colors py-2 border-b-2 border-transparent hover:border-primary focus:outline-none"
-                        :class="open ? 'text-primary border-primary' : ''"
-                    >
+                    <a href="/OJT/index.php?tab=#partners" @mouseover="open = true" class="flex items-center gap-1 hover:text-primary transition-colors py-2 border-b-2 border-transparent hover:border-primary focus:outline-none" :class="open ? 'text-primary border-primary' : ''">
                         Affiliations
                         <svg class="w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
+                    </a>
 
                     <div 
                         x-show="open"
@@ -204,10 +215,16 @@
                 <a href="/training/security.php" class="block py-2 pl-4 text-gray-600 hover:text-primary">Security Services</a>
              </div>
 
-             <a href="/trainees" class="block py-2 text-gray-600 hover:text-primary">Trainees</a>
+             <div class="py-2 border-t border-b border-gray-50 my-2">
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-wider pl-2">Trainees</span>
+                <a href="/trainees/trainees.php" class="block py-2 pl-4 text-gray-600 hover:text-primary">Trainees Directory</a>
+             </div>
              <a href="/hiring" class="block py-2 text-gray-600 hover:text-primary">Job Hiring</a>
              <a href="/OJT/index.php?tab=#affiliates" class="block py-2 text-gray-600 hover:text-primary">Affiliations</a>
         </div>
     </nav>
 </body>
 </html>
+
+
+
