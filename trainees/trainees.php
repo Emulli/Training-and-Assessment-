@@ -1,10 +1,6 @@
 <?php
 // Trainees listing UI (mock data only). Replace with DB later.
-ob_start();
 include '../includes/header.php';
-$__hdr = ob_get_clean();
-$__hdr = preg_replace('/<\/body>\s*<\/html>\s*$/i', '', $__hdr);
-echo $__hdr;
 ?>
 <style>
   /* Trainees Animations */
@@ -607,7 +603,9 @@ echo $__hdr;
     setGridClass();
     renderSchools();
     renderTrainees();
-</script>
+  </script>
+
+<?php include '../includes/footer.php'; ?>
 </body>
 </html>
 

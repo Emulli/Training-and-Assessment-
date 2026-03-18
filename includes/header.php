@@ -100,7 +100,7 @@
                     </div>
                 </div>
                 <div class="relative" x-data="{ open: false }" @click.away="open = false" @mouseleave="open = false">
-                    <a href="/trainees/trainees.php" @mouseover="open = true" class="flex items-center gap-1 hover:text-primary transition-colors py-2 border-b-2 border-transparent hover:border-primary focus:outline-none" :class="open ? 'text-primary border-primary' : ''">
+                    <a href="trainees/trainees.php" @mouseover="open = true" class="flex items-center gap-1 hover:text-primary transition-colors py-2 border-b-2 border-transparent hover:border-primary focus:outline-none" :class="open ? 'text-primary border-primary' : ''">
                         Trainees
                         <svg class="w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
@@ -117,7 +117,7 @@
                         style="display: none;" 
                     >
                         <div class="px-2 space-y-1">
-                            <a href="/trainees/trainees.php" class="block w-full px-4 py-2 text-sm text-gray-600 rounded-lg hover:text-primary hover:bg-gray-50 transition-colors">
+                            <a href="trainees/trainees.php" class="block w-full px-4 py-2 text-sm text-gray-600 rounded-lg hover:text-primary hover:bg-gray-50 transition-colors">
                                 Trainees Directory
                             </a>
                         </div>
@@ -217,14 +217,13 @@
 
              <div class="py-2 border-t border-b border-gray-50 my-2">
                 <span class="text-xs font-bold text-gray-400 uppercase tracking-wider pl-2">Trainees</span>
-                <a href="/trainees/trainees.php" class="block py-2 pl-4 text-gray-600 hover:text-primary">Trainees Directory</a>
+                <a href="trainees/trainees.php" class="block py-2 pl-4 text-gray-600 hover:text-primary">Trainees Directory</a>
              </div>
              <a href="/hiring" class="block py-2 text-gray-600 hover:text-primary">Job Hiring</a>
              <a href="/OJT/index.php?tab=#affiliates" class="block py-2 text-gray-600 hover:text-primary">Affiliations</a>
         </div>
     </nav>
-</body>
-</html>
+<!-- Header ends here; footer closes the document -->
 
 
 
